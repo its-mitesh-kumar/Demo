@@ -32,7 +32,31 @@ red-hat-developer-hub.backstage-plugin-global-header:
                  dark: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT
                  light: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgUAAABhCAMAAAB
 ```
-In addition to the Global Header, We've enhanced the branding capabilities to support theme-specific logos in the sidebar as well.
+---
+
+
+### Fallback Behavior
+
+**Logo Source Fallback:**
+
+1.  `CompanyLogo` props
+    
+2.  `app.branding.fullLogo`
+    
+3.  Default RHDH theme-specific logo
+    
+
+**Width Fallback:**
+
+1.  `CompanyLogo` props (`width`)
+    
+2.  `app.branding.fullLogoWidth`
+    
+3.  Default: `150px`
+    
+
+
+###In addition to the Global Header, We've enhanced the branding capabilities to support **theme-specific logos in the sidebar** as well.
 - Single Logo for All Themes
 ```
 app:
