@@ -43,9 +43,10 @@ red-hat-developer-hub.backstage-plugin-global-header:
           to: '/catalog'  # Path to navigate when logo is clicked
           width: 300       # Optional; fallback chain applies
           height: 200      # Optional; default max height is 40px
+          #logo: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT...' #Single logo for all theme.
           logo:
-            dark: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT...'
-            light: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgUAAABhCAMAAAB...'
+            dark: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT...' #will be shown in dark theme
+            light: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgUAAABhCAMAAAB...'  #will be shown in light theme
 
 ```
 
