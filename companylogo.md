@@ -1,76 +1,129 @@
-The Global Header in Red Hat Developer Hub now supports configurable **theme-specific company logos**. This enhancement allows platform teams to:
+ Global Header: Theme-Specific Company Logo Support
+=====================================================
 
-- Provide a single logo for both light and dark themes.
+The Global Header in **Red Hat Developer Hub (RHDH)** now supports configurable **theme-specific company logos** with full control over navigation, theming, sizing, and fallback behavior.
 
-- Customize logos independently for light and dark themes.
+* * *
 
-- Control logo dimensions (width and height).
+ Key Enhancements
+------------------
 
-- Maintain backward compatibility with older configuration styles.
+*    Company logo is now **part of the Global Header by default**.
+    
+*    Support for a **single logo** used across both Light and Dark themes.
+    
+*    Support for **theme-specific logos** (separate logos for Light and Dark themes).
+    
+*    Ability to **control logo dimensions** via width and height props.
+    
+*    **Clickable logo**: custom navigation path can be configured.
+    
+*    **Backward compatibility** with older `app.branding.fullLogo` configurations.
+    
 
-- Users can configure the destination path that the application navigates to when the company logo is clicked.
+* * *
+
+⚙️ Configuration Example
+------------------------
 
 ```
-#...rest of the global Header configuration
+# ...rest of the global header configuration
 red-hat-developer-hub.backstage-plugin-global-header:
-      mountPoints:
-        - mountPoint: application/header
-          importName: GlobalHeader
-          config:
-            #position: above-sidebar 
-            position: above-main-content #above-sidebar | above-main-content  
-         - mountPoint: global.header/component
-           importName: CompanyLogo
-           config:
-             priority: 200
-             props:
-               to: '/catalog'
-               width: 300 #fallback to app.branding.fullLogoWidth,default is 150
-               height: 200 #default is 40
-               logo: 'data:image/png;base64,
-               logo:
-                 dark: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT
-                 light: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgUAAABhCAMAAAB
+  mountPoints:
+    - mountPoint: application/header
+      importName: GlobalHeader
+      config:
+        position: above-main-content  # Options: above-sidebar | above-main-content 
+
+    - mountPoint: global.header/component
+      importName: CompanyLogo
+      config:
+        priority: 200
+        props:
+          to: '/catalog'  # Path to navigate when logo is clicked
+          width: 300       # Optional; fallback chain applies
+          height: 200      # Optional; default max height is 40px
+          logo:
+            dark: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATQAAACkCAMAAAAuT...'
+            light: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgUAAABhCAMAAAB...'
+
 ```
----
 
+* * *
 
-### Fallback Behavior
+ Fallback Behavior
+--------------------
 
-**Logo Source Fallback:**
+###  Logo Source Priority
 
-1.  `CompanyLogo` props
+1.  `CompanyLogo` props (`logo` / `logo.light` / `logo.dark`)
     
 2.  `app.branding.fullLogo`
     
 3.  Default RHDH theme-specific logo
     
 
-**Width Fallback:**
+* * *
 
-1.  `CompanyLogo` props (`width`)
+ Logo Sizing Behavior
+-----------------------
+
+###  Width Resolution Priority
+
+1.  `props.width` (from the dynamic plugin configuration)
     
-2.  `app.branding.fullLogoWidth`
+2.  `app.branding.fullLogoWidth` (from `app-config.yaml`)
     
 3.  Default: `150px`
     
 
+###  Height Resolution Priority
 
-###In addition to the Global Header, We've enhanced the branding capabilities to support **theme-specific logos in the sidebar** as well.
-- Single Logo for All Themes
+1.  `props.height` (from configuration)
+    
+2.  Default maximum height: `40px` (applied automatically if not specified)
+    
+
+> **Note:** Increasing the `height` also increases the overall height of the Global Header.
+
+###  Rendering Behavior
+
+*   The logo uses `object-fit: contain` to **maintain original aspect ratio**.
+    
+*   The image is **never cropped or distorted**.
+    
+*   If the configured `width` would result in a height greater than the allowed maximum (default: 40px), it is **automatically scaled down**.
+    
+*   This means: in some cases, changing only the width may **not visibly affect** the logo unless height is also adjusted.
+    
+
+* * *
+
+ Sidebar Support
+------------------
+
+In addition to the Global Header, **theme-specific logo support is also available in the sidebar**.
+
+###  Single Logo for All Themes
+
 ```
 app:
   branding:
-    fullLogoWidth: 220  # Optional; defaults to 150px
+    fullLogoWidth: 220
     fullLogo: "data:image/svg+xml;base64,PHN2ZyB4bWxu…"
+
 ```
-- Theme-Specific Logos
+
+###  Theme-Specific Logos
+
 ```
 app:
   branding:
-    fullLogoWidth: 220  # Optional
+    fullLogoWidth: 220
     fullLogo:
-      light: "data:image/svg+xml;base64,PHN2ZyB4bWxu…"  # Shown in Light Theme
-      dark:  "data:image/svg+xml;base64,PHN2ZyB4bWxu…"  # Shown in Dark Theme
+      light: "data:image/svg+xml;base64,PHN2ZyB4bWxu…"  # Light Theme
+      dark:  "data:image/svg+xml;base64,PHN2ZyB4bWxu…"  # Dark Theme
 
 ```
+
+
