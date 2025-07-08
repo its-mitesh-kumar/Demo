@@ -8,6 +8,8 @@ The Global Header in Red Hat Developer Hub now supports configurable **theme-spe
 
 - Maintain backward compatibility with older configuration styles.
 
+- Users can configure the destination path that the application navigates to when the company logo is clicked.
+
 ```
 #...rest of the global Header configuration
 red-hat-developer-hub.backstage-plugin-global-header:
