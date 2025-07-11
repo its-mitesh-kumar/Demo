@@ -1,4 +1,4 @@
- Global Header: Theme-Specific Company Logo Support
+Theme-Specific Company Logo Support
 =====================================================
 
 The Global Header in **Red Hat Developer Hub (RHDH)** now supports configurable **theme-specific company logos** with full control over navigation, theming, sizing, and fallback behavior.
@@ -109,6 +109,8 @@ In addition to the Global Header, **theme-specific logo support is also availabl
 
 ```
 app:
+  sidebar:
+    logo: true
   branding:
     fullLogoWidth: 220
     fullLogo: "data:image/svg+xml;base64,PHN2ZyB4bWxu…"
@@ -119,6 +121,8 @@ app:
 
 ```
 app:
+  sidebar:
+    logo: true
   branding:
     fullLogoWidth: 220
     fullLogo:
